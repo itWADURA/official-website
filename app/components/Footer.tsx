@@ -26,7 +26,7 @@ export default function Footer() {
                             <Link href="#" className="text-muted-foreground hover:text-primary">
                                 <Linkedin className="h-5 w-5" />
                             </Link>
-                            <Link href="#" className="text-muted-foreground hover:text-primary">
+                            <Link href="https://github.com/itWADURA" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
                                 <Github className="h-5 w-5" />
                             </Link>
                         </div>
@@ -36,10 +36,10 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-semibold text-foreground">Company</h3>
                         <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                            <li><Link href="#about" className="hover:text-primary">About</Link></li>
-                            <li><Link href="#work" className="hover:text-primary">Work</Link></li>
+                            <li><Link href="/" className="hover:text-primary">Home</Link></li>
+                            <li><Link href="#capabilities" className="hover:text-primary">Capabilities</Link></li>
                             <li><Link href="#process" className="hover:text-primary">Process</Link></li>
-                            <li><Link href="#careers" className="hover:text-primary">Careers</Link></li>
+                            <li><Link href="#contact" className="hover:text-primary">Contact</Link></li>
                         </ul>
                     </div>
 
