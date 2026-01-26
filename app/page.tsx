@@ -1,3 +1,4 @@
+import Background from "./components/Background";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TechStack from "./components/TechStack";
@@ -8,14 +9,17 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-white">
-      <Navbar />
-      <Hero />
-      <TechStack />
-      <Services />
-      <Process />
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      <Background />
+      <main className="relative min-h-screen text-foreground antialiased selection:bg-primary selection:text-white">
+        <Navbar />
+        <Hero />
+        <TechStack />
+        <Services />
+        <Process />
+        <Contact />
+        <Footer />
+      </main>
+    </>
   );
 }

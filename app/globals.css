@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Dark Tech Theme */
-  --background: #020410;
-  /* Midnight */
-  --foreground: #f8fafc;
-  /* Slate-50 */
+  /* Modern Glassy Theme */
+  --background: #0a0a0f;
+  --foreground: #ffffff;
 
-  --primary: #2997ff;
-  /* Electric Blue */
+  --primary: #3b82f6;
+  /* Blue 500 */
   --primary-foreground: #ffffff;
 
-  --secondary: #ccff00;
-  /* Cyber Lime */
-  --secondary-foreground: #000000;
+  --secondary: #8b5cf6;
+  /* Violet 500 */
+  --secondary-foreground: #ffffff;
+
+  --accent: #10b981;
+  /* Emerald 500 */
 
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
 
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #2997ff;
+  --border: rgba(255, 255, 255, 0.1);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -30,18 +31,81 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-glass: var(--glass);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glass Effect Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glow-effect {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3),
+    0 0 40px rgba(59, 130, 246, 0.2);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
