@@ -43,7 +43,8 @@ export default function Hero() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="mt-8 max-w-2xl text-lg text-muted-foreground sm:text-xl"
             >
-                Where Code Meets Content. We build high-performance web applications and scale social influence for the modern brand.
+                We don't just build websites. We engineer digital experiences that define the future. <br className="hidden sm:block" />
+                Your vision, powered by our code.
             </motion.p>
 
             <motion.div
@@ -56,14 +57,8 @@ export default function Hero() {
                     href="#contact"
                     className="group inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:scale-105 active:scale-95"
                 >
-                    Start a Project
+                    Initialize Project
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <Link
-                    href="#work"
-                    className="group inline-flex h-12 items-center justify-center rounded-full border border-border bg-background/50 px-8 text-sm font-semibold text-foreground backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95"
-                >
-                    View Our Work
                 </Link>
             </motion.div>
 
