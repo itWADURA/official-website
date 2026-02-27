@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 
 const projects = [
     {
@@ -11,7 +10,8 @@ const projects = [
         category: "Web Development",
         tech: "Next.js + Shopify",
         stats: "+150% Sales",
-        color: "bg-blue-500",
+        color: "bg-foreground",
+        text: "text-background",
         size: "col-span-1 md:col-span-2 row-span-2",
     },
     {
@@ -20,7 +20,8 @@ const projects = [
         category: "Branding",
         tech: "Design System",
         stats: "Brand Launch",
-        color: "bg-purple-500",
+        color: "bg-secondary border border-border",
+        text: "text-secondary-foreground",
         size: "col-span-1 row-span-1",
     },
     {
@@ -29,7 +30,8 @@ const projects = [
         category: "Product Design",
         tech: "React + D3",
         stats: "20k Users",
-        color: "bg-emerald-500",
+        color: "bg-muted border border-border",
+        text: "text-muted-foreground",
         size: "col-span-1 row-span-1",
     },
     {
@@ -38,20 +40,21 @@ const projects = [
         category: "Marketing",
         tech: "Content Strategy",
         stats: "1M+ Reach",
-        color: "bg-pink-500",
+        color: "bg-background border border-border",
+        text: "text-foreground",
         size: "col-span-1 md:col-span-2 row-span-1",
     },
 ];
 
 export default function Portfolio() {
     return (
-        <section id="work" className="py-24 sm:py-32">
+        <section id="work" className="py-24 sm:py-32 relative">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center mb-16">
                     <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                         Selected Work
                     </h2>
-                    <p className="mt-4 text-lg text-muted-foreground">
+                    <p className="mt-4 text-lg text-muted-foreground font-light">
                         A gallery of digital excellence.
                     </p>
                 </div>
@@ -60,26 +63,27 @@ export default function Portfolio() {
                     {projects.map((project, index) => (
                         <motion.div
                             key={project.id}
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.1 }}
-                            className={`group relative overflow-hidden rounded-3xl ${project.color} ${project.size} p-8`}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            whileHover={{ scale: 0.98 }}
+                            className={`group relative overflow-hidden rounded-3xl ${project.color} ${project.size} p-8 transition-transform duration-300`}
                         >
-                            <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/40" />
+                            <div className="absolute inset-0 bg-background/0 transition-colors duration-500 group-hover:bg-foreground/5" />
 
-                            <div className="relative z-10 flex h-full flex-col justify-between text-white">
+                            <div className={`relative z-10 flex h-full flex-col justify-between ${project.text}`}>
                                 <div className="flex justify-between items-start">
-                                    <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium backdrop-blur-md">
+                                    <span className={`rounded-full px-3 py-1 text-xs font-mono font-medium backdrop-blur-md border ${project.id === 1 ? 'bg-background/5 border-background/10' : 'bg-foreground/5 border-border'}`}>
                                         {project.category}
                                     </span>
-                                    <ArrowUpRight className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100" />
+                                    <ArrowUpRight className="h-6 w-6 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
                                 </div>
 
                                 <div>
-                                    <div className="mb-2 text-3xl font-bold">{project.stats}</div>
+                                    <div className="mb-2 text-4xl font-bold tracking-tight">{project.stats}</div>
                                     <h3 className="text-xl font-semibold opacity-90">{project.title}</h3>
-                                    <p className="mt-1 text-sm opacity-75">{project.tech}</p>
+                                    <p className="mt-1 text-sm font-mono opacity-60">{project.tech}</p>
                                 </div>
                             </div>
                         </motion.div>

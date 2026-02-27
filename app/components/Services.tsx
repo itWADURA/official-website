@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Cpu, Globe, Layers, Zap } from "lucide-react";
+import { useRef } from "react";
 
 const capabilities = [
     {
@@ -9,54 +10,59 @@ const capabilities = [
         description: "3D environments and fluid animations that captivate users.",
         icon: Globe,
         tech: ["Three.js", "WebGL", "Framer Motion"],
-        gradient: "from-blue-500/30 via-blue-500/20 to-transparent",
+        gradient: "from-foreground/10 via-foreground/5 to-transparent",
     },
     {
         title: "Real-Time Architecture",
         description: "Systems that react instantly. Live data, zero latency.",
         icon: Zap,
         tech: ["WebSockets", "Edge Functions", "Redis"],
-        gradient: "from-yellow-500/30 via-yellow-500/20 to-transparent",
+        gradient: "from-muted-foreground/20 via-muted-foreground/10 to-transparent",
     },
     {
         title: "Scalable Infrastructure",
         description: "Built to handle millions. Serverless, global, and resilient.",
         icon: Layers,
         tech: ["AWS Lambda", "Docker", "Kubernetes"],
-        gradient: "from-purple-500/30 via-purple-500/20 to-transparent",
+        gradient: "from-foreground/10 via-foreground/5 to-transparent",
     },
     {
         title: "AI Integration",
         description: "Smart interfaces powered by next-gen language models.",
         icon: Cpu,
         tech: ["OpenAI API", "Vector DBs", "LangChain"],
-        gradient: "from-emerald-500/30 via-emerald-500/20 to-transparent",
+        gradient: "from-muted-foreground/20 via-muted-foreground/10 to-transparent",
     },
 ];
 
 export default function Services() {
+    const containerRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"],
+    });
+
+    const headerY = useTransform(scrollYProgress, [0, 0.3], [100, 0]);
+    const headerOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
     return (
-        <section id="capabilities" className="relative py-24 sm:py-32">
+        <section ref={containerRef} id="capabilities" className="relative py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto max-w-2xl text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                <motion.div
+                    style={{ y: headerY, opacity: headerOpacity }}
+                    className="mx-auto max-w-2xl text-center mb-16"
+                >
+                    <h2
                         className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
                     >
-                        System <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Capabilities</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="mt-6 text-lg leading-8 text-muted-foreground"
+                        System <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground">Capabilities</span>
+                    </h2>
+                    <p
+                        className="mt-6 text-lg leading-8 text-muted-foreground font-light"
                     >
                         We don't sell packages. We deliver raw engineering power.
-                    </motion.p>
-                </div>
+                    </p>
+                </motion.div>
 
                 <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:max-w-none lg:grid-cols-2">
                     {capabilities.map((capability, index) => (
@@ -69,17 +75,17 @@ export default function Services() {
                             whileHover={{ y: -5 }}
                             className="group relative"
                         >
-                            <div className={`glass-strong relative h-full rounded-3xl p-8 transition-all duration-300 hover:glow-effect`}>
+                            <div className={`relative h-full rounded-3xl border border-border bg-glass p-8 backdrop-blur-xl transition-all duration-500 hover:border-foreground/30 hover:bg-background/60 hover:shadow-[0_0_40px_var(--glow-color)]`}>
                                 {/* Gradient overlay */}
-                                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${capability.gradient} opacity-0 transition-opacity group-hover:opacity-100`} />
+                                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${capability.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
 
                                 <div className="relative z-10 flex h-full flex-col gap-6">
                                     <motion.div
-                                        className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm ring-1 ring-white/10"
+                                        className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl border border-border bg-foreground/5 backdrop-blur-md"
                                         whileHover={{ scale: 1.1, rotate: 5 }}
                                         transition={{ type: "spring", stiffness: 400 }}
                                     >
-                                        <capability.icon className="h-7 w-7 text-primary transition-colors group-hover:text-secondary" />
+                                        <capability.icon className="h-7 w-7 text-foreground transition-colors" />
                                     </motion.div>
 
                                     <div>
@@ -95,7 +101,7 @@ export default function Services() {
                                         {capability.tech.map((t) => (
                                             <li
                                                 key={t}
-                                                className="inline-flex items-center rounded-full bg-white/5 px-3 py-1.5 text-xs font-mono font-medium text-foreground/90 ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/10"
+                                                className="inline-flex items-center rounded-full border border-border bg-foreground/5 px-3 py-1.5 text-xs font-mono font-medium text-foreground/80 transition-colors hover:bg-foreground hover:text-background"
                                             >
                                                 {t}
                                             </li>

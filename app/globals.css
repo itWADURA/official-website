@@ -1,27 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  /* Modern Glassy Theme */
-  --background: #0a0a0f;
-  --foreground: #ffffff;
+  /* Modern Professional Light Theme */
+  --background: #fafafa;
+  --foreground: #0a0a0a;
 
-  --primary: #3b82f6;
-  /* Blue 500 */
+  --primary: #0a0a0a;
   --primary-foreground: #ffffff;
 
-  --secondary: #8b5cf6;
-  /* Violet 500 */
+  --secondary: #e5e5e5;
+  --secondary-foreground: #0a0a0a;
+
+  --accent: #52525b;
+
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+
+  --border: rgba(0, 0, 0, 0.1);
+  --glass: rgba(0, 0, 0, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.1);
+
+  --glass-shadow: rgba(0, 0, 0, 0.05);
+  --glow-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  /* Modern Professional Dark Theme */
+  --background: #000000;
+  --foreground: #ffffff;
+
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+
+  --secondary: #262626;
   --secondary-foreground: #ffffff;
 
-  --accent: #10b981;
-  /* Emerald 500 */
+  --accent: #a3a3a3;
 
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
+  --muted: #171717;
+  --muted-foreground: #737373;
 
-  --border: rgba(255, 255, 255, 0.1);
-  --glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.15);
+  --glass: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.1);
+
+  --glass-shadow: rgba(0, 0, 0, 0.5);
+  --glow-color: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -42,7 +66,6 @@
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -54,7 +77,6 @@
 }
 
 @keyframes glow {
-
   0%,
   100% {
     opacity: 0.5;
@@ -86,26 +108,53 @@ body {
   overflow-x: hidden;
 }
 
+/* 
+ * Strict reset targeting the tenacious blue vignette/glow effect.
+ * Next.js or a browser extension might be injecting a fixed overlay with this glow.
+ */
+*, *::before, *::after {
+  /* Prevent any rogue outer blue shadows unless explicitly defined */
+  outline-color: rgba(255, 255, 255, 0.1); 
+}
+
+/* Force Next.js injected overlay or body edges to have no blue shadow */
+html, body, #__next {
+  box-shadow: none !important;
+}
+
+/* Aggressively target Next.js dev overlays that might be creating the blue edge glow */
+#nextjs-toast-errors-parent,
+[data-nextjs-dialog-overlay],
+nextjs-portal {
+  display: none !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Glass Effect Utilities */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--border);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
 }
 
 .glow-effect {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3),
-    0 0 40px rgba(59, 130, 246, 0.2);
+  box-shadow:
+    0 0 20px var(--glow-color),
+    0 0 40px calc(var(--glow-color) / 2);
 }
 
 .text-glow {
-  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  text-shadow: 0 0 20px var(--glow-color);
 }
+
+

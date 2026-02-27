@@ -10,8 +10,8 @@ const technologies = [
 
 export default function TechStack() {
     return (
-        <section className="relative py-16 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <section className="relative py-16 overflow-hidden border-y border-border">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-transparent" />
 
             <div className="relative">
                 <motion.div
@@ -20,7 +20,7 @@ export default function TechStack() {
                     viewport={{ once: true }}
                     className="mb-8 text-center"
                 >
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                    <h3 className="text-xs font-mono font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                         Powered By Modern Stack
                     </h3>
                 </motion.div>
@@ -40,12 +40,12 @@ export default function TechStack() {
                         }}
                     >
                         {[...technologies, ...technologies, ...technologies].map((tech, i) => (
-                            <motion.div
+                                <motion.div
                                 key={i}
-                                whileHover={{ scale: 1.1, y: -5 }}
-                                className="glass rounded-2xl px-6 py-3 backdrop-blur-xl"
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                className="rounded-xl border border-border bg-glass px-6 py-3 backdrop-blur-md transition-all hover:bg-foreground/10 hover:border-foreground/30"
                             >
-                                <span className="text-base font-mono font-semibold text-foreground/80 transition-colors hover:text-primary">
+                                <span className="text-sm font-mono text-muted-foreground transition-colors hover:text-foreground">
                                     {tech}
                                 </span>
                             </motion.div>

@@ -5,24 +5,34 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-// Particle system
+// Particle system (Client-side only to prevent hydration mismatch)
 const ParticleField = () => {
-    const particles = Array.from({ length: 50 }, (_, i) => ({
-        id: i,
-        size: Math.random() * 4 + 1,
-        duration: Math.random() * 3 + 2,
-        delay: Math.random() * 2,
-    }));
+    const [particles, setParticles] = useState<Array<{ id: number, size: number, duration: number, delay: number, left: number, top: number }>>([]);
+
+    useEffect(() => {
+        // Generate random values only after component mounts on the client
+        const generatedParticles = Array.from({ length: 50 }, (_, i) => ({
+            id: i,
+            size: Math.random() * 4 + 1,
+            duration: Math.random() * 3 + 2,
+            delay: Math.random() * 2,
+            left: Math.random() * 100,
+            top: Math.random() * 100,
+        }));
+        setParticles(generatedParticles);
+    }, []);
+
+    if (particles.length === 0) return null;
 
     return (
         <div className="absolute inset-0 overflow-hidden">
             {particles.map((particle) => (
                 <motion.div
                     key={particle.id}
-                    className="absolute h-1 w-1 rounded-full bg-primary/40"
+                    className="absolute h-1 w-1 rounded-full bg-foreground/30"
                     style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
+                        left: `${particle.left}%`,
+                        top: `${particle.top}%`,
                     }}
                     animate={{
                         opacity: [0, 1, 0],
@@ -44,7 +54,7 @@ const FloatingShapes = () => {
     return (
         <>
             <motion.div
-                className="absolute left-[10%] top-[20%] h-24 w-24 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent backdrop-blur-sm border border-primary/20"
+                className="absolute left-[10%] top-[20%] h-24 w-24 rounded-2xl bg-gradient-to-br from-foreground/10 to-transparent backdrop-blur-sm border border-border"
                 animate={{
                     y: [0, -30, 0],
                     rotate: [0, 180, 360],
@@ -57,7 +67,7 @@ const FloatingShapes = () => {
             />
 
             <motion.div
-                className="absolute right-[15%] top-[30%] h-32 w-32 rounded-full bg-gradient-to-br from-secondary/20 to-transparent backdrop-blur-sm border border-secondary/20"
+                className="absolute right-[15%] top-[30%] h-32 w-32 rounded-full bg-gradient-to-br from-foreground/5 to-transparent backdrop-blur-sm border border-border"
                 animate={{
                     y: [0, 40, 0],
                     x: [0, 20, 0],
@@ -70,7 +80,7 @@ const FloatingShapes = () => {
             />
 
             <motion.div
-                className="absolute left-[70%] bottom-[20%] h-20 w-20 rotate-45 bg-gradient-to-br from-accent/20 to-transparent backdrop-blur-sm border border-accent/20"
+                className="absolute left-[70%] bottom-[20%] h-20 w-20 rotate-45 bg-gradient-to-br from-foreground/5 to-transparent backdrop-blur-sm border border-border"
                 animate={{
                     y: [0, -20, 0],
                     rotate: [45, 225, 405],
@@ -128,69 +138,59 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="mb-6 inline-flex items-center gap-2 rounded-full glass-strong px-6 py-2.5 text-sm font-semibold text-primary"
+                    className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-glass px-6 py-2.5 text-sm font-semibold text-foreground/80 backdrop-blur-md"
                 >
-                    <Sparkles className="h-4 w-4 animate-pulse" />
+                    <Sparkles className="h-4 w-4 animate-pulse text-foreground" />
                     Premium Digital Engineering
                 </motion.div>
 
                 <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="max-w-5xl text-6xl font-bold tracking-tight text-foreground sm:text-8xl md:text-9xl mb-8"
+                    transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+                    className="max-w-5xl text-6xl font-bold tracking-tighter text-foreground sm:text-8xl md:text-9xl mb-8 leading-[1.1]"
                 >
-                    <span className="inline-block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient-shift_3s_ease_infinite]">
-                        Crafting Digital
+                    <span className="block">Architecting</span>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/40">
+                        The Future.
                     </span>
-                    <br />
-                    <span className="text-glow">Excellence</span>
                 </motion.h1>
 
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl"
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-2xl font-light"
                 >
-                    We transform ideas into immersive digital experiences.
-                    <span className="text-foreground font-semibold"> Code.</span>
-                    <span className="text-foreground font-semibold"> Design.</span>
-                    <span className="text-foreground font-semibold"> Innovation.</span>
+                    We engineer elite digital experiences.
+                    <span className="text-foreground font-medium"> Minimal.</span>
+                    <span className="text-foreground font-medium"> Scalable.</span>
+                    <span className="text-foreground font-medium"> Perfect.</span>
                 </motion.p>
 
                 {/* Glass card CTA */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-12"
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className="mt-16"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     <Link
                         href="#contact"
-                        className={`group relative inline-flex h-14 items-center justify-center gap-2 rounded-full px-8 text-base font-semibold transition-all ${isHovered ? 'glow-effect' : ''
+                        className={`group relative inline-flex h-16 items-center justify-center gap-3 rounded-full border border-border px-10 text-lg font-medium transition-all duration-300 ${isHovered ? 'bg-foreground text-background' : 'bg-transparent text-foreground'
                             }`}
-                        style={{
-                            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8))',
-                            backdropFilter: 'blur(12px)',
-                        }}
+                        style={{ backdropFilter: 'blur(12px)' }}
                     >
-                        <span className="relative z-10 text-white">Start Your Project</span>
-                        <ArrowRight className="relative z-10 h-5 w-5 text-white transition-transform group-hover:translate-x-1" />
-
-                        {/* Animated border */}
+                        <span className="relative z-10">Start Your Project</span>
+                        <ArrowRight className={`relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 ${isHovered ? 'text-background' : 'text-foreground'}`} />
+                        
+                        {/* Subtle glow behind button */}
                         <motion.div
-                            className="absolute inset-0 rounded-full"
-                            style={{
-                                background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-                                opacity: 0.5,
-                                filter: 'blur(20px)',
-                            }}
-                            animate={{
-                                scale: isHovered ? 1.1 : 1,
-                            }}
+                            className="absolute -inset-1 rounded-full bg-foreground/20 blur-xl z-0"
+                            animate={{ opacity: isHovered ? 0.3 : 0 }}
+                            transition={{ duration: 0.3 }}
                         />
                     </Link>
                 </motion.div>
@@ -198,20 +198,20 @@ export default function Hero() {
 
             {/* Bottom stats */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="absolute bottom-24 left-0 right-0 z-10"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6 }}
+                className="absolute bottom-16 left-0 right-0 z-10"
             >
-                <div className="mx-auto grid max-w-4xl grid-cols-3 gap-8 glass rounded-2xl p-6">
+                <div className="mx-auto grid max-w-4xl grid-cols-3 gap-8 rounded-2xl border border-border bg-background/40 p-8 backdrop-blur-xl">
                     {[
-                        { label: "Lightning Fast", value: "<100ms" },
-                        { label: "Modern Stack", value: "2024" },
-                        { label: "Global CDN", value: "99.9%" },
+                        { label: "Performance", value: "<100ms" },
+                        { label: "Engineering", value: "Elite" },
+                        { label: "Uptime", value: "99.9%" },
                     ].map((stat, i) => (
                         <div key={i} className="flex flex-col items-center">
-                            <div className="text-2xl font-bold text-primary">{stat.value}</div>
-                            <div className="text-xs text-muted-foreground">{stat.label}</div>
+                            <div className="text-3xl font-bold text-foreground mb-2 tracking-tight">{stat.value}</div>
+                            <div className="text-sm tracking-widest text-muted-foreground uppercase">{stat.label}</div>
                         </div>
                     ))}
                 </div>
