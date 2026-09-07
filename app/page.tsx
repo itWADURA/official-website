@@ -1,26 +1,36 @@
-import Background from "./components/Background";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import TechStack from "./components/TechStack";
-import Services from "./components/Services";
-import Process from "./components/Process";
-import Portfolio from "./components/Portfolio";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import React from "react";
+import { AmbientLight } from "./components/layout/ambient-light";
+import { Navbar } from "./components/layout/navbar";
+import { HeroTemplate } from "./components/templates/hero-template";
+import { BentoGridTemplate } from "./components/templates/bento-grid";
+import { TimelineTemplate } from "./components/templates/timeline-template";
+import { WorkShowcaseTemplate } from "./components/templates/work-showcase";
+import { TechMarqueeTemplate } from "./components/templates/tech-marquee";
+import { CtaTemplate } from "./components/templates/cta-template";
+import { ContactTemplate } from "./components/templates/contact-template";
+import { Footer } from "./components/layout/footer";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen selection:bg-primary selection:text-white">
-      <Background />
+    <div className="relative min-h-screen bg-[#08090a] text-white selection:bg-white selection:text-black">
+      {/* Linear Ambient Spotlight & Micro-Grid */}
+      <AmbientLight />
+
+      {/* Glassmorphic Fixed Navigation Bar */}
       <Navbar />
-      <main className="flex flex-col gap-12 sm:gap-20">
-        <Hero />
-        <TechStack />
-        <Services />
-        <Process />
-        <Portfolio />
-        <Contact />
+
+      {/* Main Page Content */}
+      <main className="relative z-10 flex flex-col">
+        <HeroTemplate />
+        <TechMarqueeTemplate />
+        <BentoGridTemplate />
+        <TimelineTemplate />
+        <WorkShowcaseTemplate />
+        <CtaTemplate />
+        <ContactTemplate />
       </main>
+
+      {/* Linear Footer */}
       <Footer />
     </div>
   );
