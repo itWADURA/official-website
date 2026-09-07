@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 
 export default function Contact() {
     const [formState, setFormState] = useState({
@@ -27,10 +26,10 @@ export default function Contact() {
                     {/* Text Content */}
                     <div className="max-w-xl">
                         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                            Let's Build Something Legendary
+                            Let&apos;s Build Something Legendary
                         </h2>
                         <p className="mt-4 text-lg text-muted-foreground">
-                            Ready to scale your digital presence? Tell us about your project, and we'll architect the solution.
+                            Ready to scale your digital presence? Tell us about your project, and we&apos;ll architect the solution.
                         </p>
 
                         <dl className="mt-10 space-y-4 text-base leading-7 text-muted-foreground">

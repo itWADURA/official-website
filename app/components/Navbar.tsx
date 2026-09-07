@@ -8,6 +8,7 @@ import { useState } from "react";
 const navLinks = [
     { name: "Capabilities", href: "#capabilities" },
     { name: "Process", href: "#process" },
+    { name: "Work", href: "#work" },
 ];
 
 export default function Navbar() {

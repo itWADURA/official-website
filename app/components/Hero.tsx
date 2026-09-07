@@ -5,24 +5,36 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+interface Particle {
+    id: number;
+    size: number;
+    duration: number;
+    delay: number;
+    left: number;
+    top: number;
+}
+
+// Deterministic particles generated once to ensure React render purity and zero SSR hydration mismatches
+const PARTICLES: Particle[] = Array.from({ length: 45 }, (_, i) => ({
+    id: i,
+    size: ((i * 7) % 4) + 1.5,
+    duration: ((i * 11) % 3) + 2.5,
+    delay: ((i * 13) % 2.5),
+    left: (i * 2.2 + ((i * 17) % 20)) % 100,
+    top: (i * 2.1 + ((i * 23) % 25)) % 100,
+}));
+
 // Particle system
 const ParticleField = () => {
-    const particles = Array.from({ length: 50 }, (_, i) => ({
-        id: i,
-        size: Math.random() * 4 + 1,
-        duration: Math.random() * 3 + 2,
-        delay: Math.random() * 2,
-    }));
-
     return (
-        <div className="absolute inset-0 overflow-hidden">
-            {particles.map((particle) => (
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            {PARTICLES.map((particle) => (
                 <motion.div
                     key={particle.id}
                     className="absolute h-1 w-1 rounded-full bg-primary/40"
                     style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
+                        left: `${particle.left}%`,
+                        top: `${particle.top}%`,
                     }}
                     animate={{
                         opacity: [0, 1, 0],
@@ -42,7 +54,7 @@ const ParticleField = () => {
 // Floating geometric shapes
 const FloatingShapes = () => {
     return (
-        <>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <motion.div
                 className="absolute left-[10%] top-[20%] h-24 w-24 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent backdrop-blur-sm border border-primary/20"
                 animate={{
@@ -81,7 +93,7 @@ const FloatingShapes = () => {
                     ease: "easeInOut",
                 }}
             />
-        </>
+        </div>
     );
 };
 

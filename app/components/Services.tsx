@@ -54,7 +54,7 @@ export default function Services() {
                         transition={{ delay: 0.1 }}
                         className="mt-6 text-lg leading-8 text-muted-foreground"
                     >
-                        We don't sell packages. We deliver raw engineering power.
+                        We don&apos;t sell packages. We deliver raw engineering power.
                     </motion.p>
                 </div>
 

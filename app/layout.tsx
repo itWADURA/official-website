@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "itWadura - Coming Soon",
-  description: "Our website is currently under construction. We'll be here soon with our new awesome site.",
+  title: "itWADURA | Architecting Digital Presence & Engineering Excellence",
+  description:
+    "itWADURA delivers high-performance web development, immersive digital experiences, scalable cloud infrastructure, and AI integration.",
   icons: {
     icon: "/itWadura-logo.svg",
   },
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark scroll-smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
