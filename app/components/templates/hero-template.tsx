@@ -1,201 +1,306 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Terminal, Cpu, Zap, Activity } from "lucide-react";
+import { ArrowRight, Layout, PackageCheck, Workflow, CheckCircle2, ChevronRight } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Badge } from "@/app/components/ui/badge";
-import { Kbd } from "@/app/components/ui/kbd";
 
 export const HeroTemplate: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<"telemetry" | "architecture" | "agents">("telemetry");
+  const [activeTab, setActiveTab] = useState<"web" | "inventory" | "automation">("web");
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Main Hero Header */}
         <div className="mx-auto max-w-4xl text-center">
           {/* Micro-Typography Badge */}
           <div className="inline-flex mb-6">
-            <Badge variant="lime" dot>
-              FIG 0.1 · DIGITAL ENGINEERING & SCALE
+            <Badge variant="blue" dot>
+              DIGITAL SOLUTIONS / SOFTWARE ENGINEERING
             </Badge>
           </div>
 
-          {/* Dual-Tone Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08]">
-            Crafting Digital Excellence{" "}
-            <span className="text-[#8a8f98] font-normal block sm:inline">
-              with high-velocity engineering.
+          {/* Expressive Editorial Headline */}
+          <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-bold tracking-tight text-[#111827] leading-[1.08]">
+            Building Digital Experiences{" "}
+            <span className="text-[#193b63] relative inline-block">
+              That Move Businesses Forward.
+              <span className="absolute bottom-1 left-0 w-full h-[6px] bg-[#8ccff0]/30 -z-10 rounded-full" />
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-            itWADURA architects immersive web platforms, resilient edge infrastructure,
-            and autonomous AI workflows built for companies scaling the future.
+          {/* Supporting Description */}
+          <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-[#4b5563] leading-relaxed">
+            From modern websites to custom business systems and intelligent automation, itWADURA helps businesses turn ideas into practical digital solutions.
           </p>
 
           {/* Dual Action CTAs */}
-          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3.5">
+          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button
               href="#contact"
               variant="primary"
               size="lg"
               icon={<ArrowRight className="h-4 w-4" />}
             >
-              Start Your Project
+              Start a Project
             </Button>
-            <Button href="#capabilities" variant="secondary" size="lg">
-              Explore Capabilities
+            <Button href="#services" variant="secondary" size="lg">
+              Explore What We Do
             </Button>
           </div>
 
-          {/* Micro Shortcut Tip */}
-          <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-subtle-foreground font-mono">
-            <span>Press</span>
-            <Kbd>C</Kbd>
-            <span>to jump to contact inquiry</span>
-          </div>
+          {/* Supporting Value Proposition Line */}
+          <p className="mt-5 text-xs sm:text-sm font-medium text-[#6b7280]">
+            Thoughtful design. Reliable engineering. Smarter business.
+          </p>
         </div>
 
-        {/* High-Fidelity Linear-Style Workspace Console Mockup */}
-        <div className="mt-16 sm:mt-20 mx-auto max-w-5xl">
-          <div className="relative rounded-2xl bg-[#0d0e12] border border-white/[0.1] shadow-[0_24px_80px_-16px_rgba(0,0,0,0.8),inset_0_1px_0_0_rgba(255,255,255,0.1)] overflow-hidden">
-            {/* Window Header Bar */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.08] bg-white/[0.02]">
+        {/* Custom Interactive Workspace Composition */}
+        <div className="mt-14 sm:mt-16 mx-auto max-w-5xl">
+          {/* Interactive Capabilities Switcher */}
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <button
+              onClick={() => setActiveTab("web")}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                activeTab === "web"
+                  ? "bg-[#193b63] text-white shadow-sm"
+                  : "bg-[#f7f9fc] text-[#4b5563] hover:bg-[#f0f8fc] hover:text-[#193b63] border border-[rgba(17,24,39,0.06)]"
+              }`}
+            >
+              <Layout className="h-3.5 w-3.5" />
+              Web Experiences
+            </button>
+            <button
+              onClick={() => setActiveTab("inventory")}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                activeTab === "inventory"
+                  ? "bg-[#193b63] text-white shadow-sm"
+                  : "bg-[#f7f9fc] text-[#4b5563] hover:bg-[#f0f8fc] hover:text-[#193b63] border border-[rgba(17,24,39,0.06)]"
+              }`}
+            >
+              <PackageCheck className="h-3.5 w-3.5" />
+              Business Systems
+            </button>
+            <button
+              onClick={() => setActiveTab("automation")}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                activeTab === "automation"
+                  ? "bg-[#193b63] text-white shadow-sm"
+                  : "bg-[#f7f9fc] text-[#4b5563] hover:bg-[#f0f8fc] hover:text-[#193b63] border border-[rgba(17,24,39,0.06)]"
+              }`}
+            >
+              <Workflow className="h-3.5 w-3.5" />
+              Automation Workflows
+            </button>
+          </div>
+
+          {/* Floating Browser / System Interface Frame */}
+          <div className="rounded-2xl border border-[rgba(17,24,39,0.10)] bg-white shadow-[0_20px_50px_rgba(25,59,99,0.08)] overflow-hidden">
+            {/* macOS / Web Window Controls */}
+            <div className="flex items-center justify-between border-b border-[rgba(17,24,39,0.08)] bg-[#f7f9fc] px-4 py-3">
               <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-white/10" />
-                <div className="h-3 w-3 rounded-full bg-white/10" />
-                <div className="h-3 w-3 rounded-full bg-white/10" />
-                <span className="ml-2 font-mono text-[11px] text-muted-foreground">
-                  itwadura-node-cluster-prod · v2.4.0
+                <span className="h-3 w-3 rounded-full bg-[#f87171]/80" />
+                <span className="h-3 w-3 rounded-full bg-[#fbbf24]/80" />
+                <span className="h-3 w-3 rounded-full bg-[#34d399]/80" />
+                <span className="ml-3 font-mono text-[11px] text-[#6b7280]">
+                  {activeTab === "web" && "itwadura.studio/client-experience"}
+                  {activeTab === "inventory" && "systems.itwadura.internal/inventory-control"}
+                  {activeTab === "automation" && "pipelines.itwadura.io/sync-dispatch"}
                 </span>
               </div>
-
-              {/* Tab Selector */}
-              <div className="flex items-center gap-1 bg-white/[0.03] p-1 rounded-lg border border-white/[0.06]">
-                <button
-                  onClick={() => setActiveTab("telemetry")}
-                  className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
-                    activeTab === "telemetry"
-                      ? "bg-white/[0.08] text-white shadow-xs"
-                      : "text-muted-foreground hover:text-white"
-                  }`}
-                >
-                  Telemetry
-                </button>
-                <button
-                  onClick={() => setActiveTab("architecture")}
-                  className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
-                    activeTab === "architecture"
-                      ? "bg-white/[0.08] text-white shadow-xs"
-                      : "text-muted-foreground hover:text-white"
-                  }`}
-                >
-                  Edge Config
-                </button>
-                <button
-                  onClick={() => setActiveTab("agents")}
-                  className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
-                    activeTab === "agents"
-                      ? "bg-white/[0.08] text-white shadow-xs"
-                      : "text-muted-foreground hover:text-white"
-                  }`}
-                >
-                  Agent Stream
-                </button>
-              </div>
-
-              <div className="hidden sm:flex items-center gap-2 font-mono text-xs text-emerald-400">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>ALL_SYSTEMS_OPTIMAL</span>
+              <div className="flex items-center gap-2">
+                <span className="inline-block h-2 w-2 rounded-full bg-[#8ccff0] animate-pulse" />
+                <span className="font-mono text-[10px] text-[#193b63] font-medium uppercase tracking-wider">
+                  Interactive Demo
+                </span>
               </div>
             </div>
 
-            {/* Console Body */}
-            <div className="p-6 sm:p-8 font-mono">
-              {activeTab === "telemetry" && (
-                <div className="space-y-6">
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                      <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                        <Activity className="h-3.5 w-3.5 text-cyan-400" />
-                        P99 Latency
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">18.4ms</div>
-                      <div className="mt-1 text-[11px] text-emerald-400">-4.2ms vs baseline</div>
+            {/* Dynamic Interactive Stage Content */}
+            <div className="p-6 sm:p-10 bg-white min-h-[380px] flex items-center justify-center">
+              {/* TAB 1: WEB EXPERIENCES PREVIEW */}
+              {activeTab === "web" && (
+                <div className="w-full space-y-6 animate-in fade-in duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[rgba(17,24,39,0.06)]">
+                    <div>
+                      <span className="font-mono text-xs uppercase tracking-wider text-[#193b63] font-semibold">
+                        Preview: High-Conversion Digital Presence
+                      </span>
+                      <h3 className="text-xl font-bold text-[#111827]">
+                        Acme Enterprises · Corporate Digital Platform
+                      </h3>
                     </div>
-                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                      <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                        <Zap className="h-3.5 w-3.5 text-[#d4f53b]" />
-                        Edge Throughput
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">48.2k</div>
-                      <div className="mt-1 text-[11px] text-muted-foreground">req / sec global</div>
-                    </div>
-                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                      <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                        <Cpu className="h-3.5 w-3.5 text-purple-400" />
-                        Memory Delta
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">124MB</div>
-                      <div className="mt-1 text-[11px] text-emerald-400">Zero memory leaks</div>
-                    </div>
-                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                      <div className="text-xs text-muted-foreground flex items-center gap-1.5">
-                        <Terminal className="h-3.5 w-3.5 text-amber-400" />
-                        SSL Verification
-                      </div>
-                      <div className="mt-2 text-2xl font-bold text-white">TLS 1.3</div>
-                      <div className="mt-1 text-[11px] text-emerald-400">Encrypted AES-256</div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-1 rounded bg-[#f0f8fc] text-[#193b63] text-xs font-mono font-medium border border-[#8ccff0]/50">
+                        100/100 Core Web Vitals
+                      </span>
                     </div>
                   </div>
 
-                  {/* Terminal Log Stream */}
-                  <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06] text-xs text-muted-foreground space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-cyan-400">➜</span>
-                      <span className="text-white">cluster.init</span>
-                      <span className="text-muted-foreground/60">[regions: sfo1, iad1, fra1, sin1]</span>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-5 rounded-xl bg-[#f7f9fc] border border-[rgba(17,24,39,0.06)]">
+                      <span className="text-xs text-[#6b7280]">Average Load Time</span>
+                      <p className="text-2xl font-bold text-[#193b63] mt-1">0.45s</p>
+                      <p className="text-xs text-[#111827] mt-2">Next.js Edge rendering & image streaming</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-emerald-400">✔</span>
-                      <span>Turbopack HMR reconciled 24 components in 32ms</span>
+                    <div className="p-5 rounded-xl bg-[#f0f8fc] border border-[#8ccff0]/40">
+                      <span className="text-xs text-[#193b63]">Inquiry Conversion Rate</span>
+                      <p className="text-2xl font-bold text-[#193b63] mt-1">+68%</p>
+                      <p className="text-xs text-[#4b5563] mt-2">Intuitive UX wireframing & responsive layouts</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-purple-400">⚡</span>
-                      <span>Next.js 16 Edge Runtime dispatching streaming SSR response payload</span>
+                    <div className="p-5 rounded-xl bg-[#f7f9fc] border border-[rgba(17,24,39,0.06)]">
+                      <span className="text-xs text-[#6b7280]">Mobile Responsiveness</span>
+                      <p className="text-2xl font-bold text-[#193b63] mt-1">100%</p>
+                      <p className="text-xs text-[#111827] mt-2">Tailored fluid scaling for all device widths</p>
                     </div>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#193b63] text-white flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-[#8ccff0]" />
+                      <span className="text-sm font-medium">
+                        Custom-engineered for seamless lead generation & client onboarding.
+                      </span>
+                    </div>
+                    <a
+                      href="#services"
+                      className="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-[#8ccff0] hover:underline"
+                    >
+                      View web development services <ChevronRight className="h-3.5 w-3.5" />
+                    </a>
                   </div>
                 </div>
               )}
 
-              {activeTab === "architecture" && (
-                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06] text-xs text-muted-foreground space-y-2 font-mono">
-                  <p className="text-white font-semibold mb-2">&#47;&#47; Edge Distribution Topology</p>
-                  <p><span className="text-purple-400">export const</span> edgeTopology = &#123;</p>
-                  <p className="pl-4">provider: <span className="text-[#d4f53b]">&apos;multi-region-edge&apos;</span>,</p>
-                  <p className="pl-4">protocol: <span className="text-[#d4f53b]">&apos;HTTP/3 over QUIC&apos;</span>,</p>
-                  <p className="pl-4">caching: &#123; strategy: <span className="text-[#d4f53b]">&apos;stale-while-revalidate&apos;</span>, ttl: 86400 &#125;,</p>
-                  <p className="pl-4">encryption: <span className="text-[#d4f53b]">&apos;Zero-Trust WireGuard&apos;</span>,</p>
-                  <p>&#125;;</p>
+              {/* TAB 2: BUSINESS SYSTEMS PREVIEW */}
+              {activeTab === "inventory" && (
+                <div className="w-full space-y-6 animate-in fade-in duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[rgba(17,24,39,0.06)]">
+                    <div>
+                      <span className="font-mono text-xs uppercase tracking-wider text-[#193b63] font-semibold">
+                        Preview: Custom Operations & Inventory Suite
+                      </span>
+                      <h3 className="text-xl font-bold text-[#111827]">
+                        Central Warehouse & Point-of-Sale Portal
+                      </h3>
+                    </div>
+                    <span className="px-2.5 py-1 rounded bg-[#f0f8fc] text-[#193b63] text-xs font-mono font-medium border border-[#8ccff0]/50">
+                      Live Multi-Location Sync
+                    </span>
+                  </div>
+
+                  {/* Mock Inventory Table */}
+                  <div className="overflow-x-auto rounded-xl border border-[rgba(17,24,39,0.08)]">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-[#f7f9fc] text-[#6b7280] font-mono border-b border-[rgba(17,24,39,0.08)]">
+                        <tr>
+                          <th className="py-2.5 px-4 font-medium">SKU / Item</th>
+                          <th className="py-2.5 px-4 font-medium">Location</th>
+                          <th className="py-2.5 px-4 font-medium">In Stock</th>
+                          <th className="py-2.5 px-4 font-medium">Reorder Status</th>
+                          <th className="py-2.5 px-4 font-medium text-right">Value</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[rgba(17,24,39,0.05)] text-[#111827]">
+                        <tr>
+                          <td className="py-3 px-4 font-medium text-[#193b63]">SKU-8921 · Precision Sensor Unit</td>
+                          <td className="py-3 px-4 text-[#4b5563]">Main Depot (Rack B4)</td>
+                          <td className="py-3 px-4 font-bold">142 units</td>
+                          <td className="py-3 px-4">
+                            <span className="inline-flex items-center gap-1 text-[#193b63] font-medium bg-[#f0f8fc] px-2 py-0.5 rounded text-[11px] border border-[#8ccff0]/40">
+                              Optimal
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-right font-mono">$7,100</td>
+                        </tr>
+                        <tr>
+                          <td className="py-3 px-4 font-medium text-[#193b63]">SKU-4402 · Thermal Controller</td>
+                          <td className="py-3 px-4 text-[#4b5563]">Branch North</td>
+                          <td className="py-3 px-4 font-bold text-amber-600">8 units</td>
+                          <td className="py-3 px-4">
+                            <span className="inline-flex items-center gap-1 text-amber-700 font-medium bg-amber-50 px-2 py-0.5 rounded text-[11px] border border-amber-200">
+                              Reorder Triggered
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-right font-mono">$1,920</td>
+                        </tr>
+                        <tr>
+                          <td className="py-3 px-4 font-medium text-[#193b63]">SKU-1089 · Industrial Relay Pack</td>
+                          <td className="py-3 px-4 text-[#4b5563]">Main Depot (Rack A1)</td>
+                          <td className="py-3 px-4 font-bold">380 units</td>
+                          <td className="py-3 px-4">
+                            <span className="inline-flex items-center gap-1 text-[#193b63] font-medium bg-[#f0f8fc] px-2 py-0.5 rounded text-[11px] border border-[#8ccff0]/40">
+                              Optimal
+                            </span>
+                          </td>
+                          <td className="py-3 px-4 text-right font-mono">$4,560</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <p className="text-xs text-[#6b7280]">
+                    *Custom inventory software built to replace fragile spreadsheets with zero operational friction.
+                  </p>
                 </div>
               )}
 
-              {activeTab === "agents" && (
-                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06] text-xs text-muted-foreground space-y-2 font-mono">
-                  <p className="text-white font-semibold mb-2">&#47;&#47; Autonomous Pipeline Stream</p>
-                  <div className="flex items-center gap-2 text-emerald-400">
-                    <span>[AGENT_ORCHESTRATOR]</span>
-                    <span>Vector context indexed (dim=1536)</span>
+              {/* TAB 3: AUTOMATION WORKFLOWS PREVIEW */}
+              {activeTab === "automation" && (
+                <div className="w-full space-y-6 animate-in fade-in duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[rgba(17,24,39,0.06)]">
+                    <div>
+                      <span className="font-mono text-xs uppercase tracking-wider text-[#193b63] font-semibold">
+                        Preview: Event-Driven Automation Diagram
+                      </span>
+                      <h3 className="text-xl font-bold text-[#111827]">
+                        Trigger → Process → Decision → Action Engine
+                      </h3>
+                    </div>
+                    <span className="px-2.5 py-1 rounded bg-[#f0f8fc] text-[#193b63] text-xs font-mono font-medium border border-[#8ccff0]/50">
+                      Zero Human Touch
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2 text-cyan-400">
-                    <span>[STREAMING_INFERENCE]</span>
-                    <span>Generated optimized GraphQL resolver AST</span>
+
+                  {/* Interactive Workflow Node Chain */}
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                    <div className="p-4 rounded-xl bg-[#f7f9fc] border border-[rgba(17,24,39,0.08)] relative">
+                      <span className="text-[10px] font-mono uppercase text-[#6b7280]">01 · TRIGGER</span>
+                      <h4 className="text-sm font-bold text-[#193b63] mt-1">Customer Order Placed</h4>
+                      <p className="text-xs text-[#4b5563] mt-1">Webhook catches e-commerce sale event.</p>
+                      <div className="hidden sm:block absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-4 h-4 bg-white border border-[#8ccff0] rounded-full flex items-center justify-center text-[9px] text-[#193b63] font-bold">
+                        →
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-[#f0f8fc] border border-[#8ccff0]/50 relative">
+                      <span className="text-[10px] font-mono uppercase text-[#193b63] font-semibold">02 · PROCESS</span>
+                      <h4 className="text-sm font-bold text-[#193b63] mt-1">Stock Deducted</h4>
+                      <p className="text-xs text-[#4b5563] mt-1">Real-time inventory ledger decremented.</p>
+                      <div className="hidden sm:block absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-4 h-4 bg-white border border-[#8ccff0] rounded-full flex items-center justify-center text-[9px] text-[#193b63] font-bold">
+                        →
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-[#f7f9fc] border border-[rgba(17,24,39,0.08)] relative">
+                      <span className="text-[10px] font-mono uppercase text-[#6b7280]">03 · DECISION</span>
+                      <h4 className="text-sm font-bold text-[#193b63] mt-1">Threshold Check</h4>
+                      <p className="text-xs text-[#4b5563] mt-1">If stock &lt; threshold, alert supplier.</p>
+                      <div className="hidden sm:block absolute -right-2 top-1/2 -translate-y-1/2 z-10 w-4 h-4 bg-white border border-[#8ccff0] rounded-full flex items-center justify-center text-[9px] text-[#193b63] font-bold">
+                        →
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-[#193b63] text-white">
+                      <span className="text-[10px] font-mono uppercase text-[#8ccff0]">04 · ACTION</span>
+                      <h4 className="text-sm font-bold text-white mt-1">Receipt &amp; WhatsApp</h4>
+                      <p className="text-xs text-white/80 mt-1">Customer receives automated PDF delivery notice.</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-[#d4f53b]">
-                    <span>[EVALUATION]</span>
-                    <span>Confidence score: 0.998 · Ready for production deployment</span>
+
+                  <div className="p-3 bg-[#f7f9fc] rounded-lg border border-[rgba(17,24,39,0.06)] text-xs text-[#4b5563] flex items-center justify-between">
+                    <span>Average Execution Time: <strong>180 milliseconds</strong></span>
+                    <span className="font-mono text-[#193b63] font-semibold">99.99% Event Delivery</span>
                   </div>
                 </div>
               )}

@@ -1,24 +1,30 @@
 import { NextResponse } from "next/server";
 
-interface ContactPayload {
+interface ContactInquiryPayload {
   name: string;
+  businessName?: string;
   email: string;
-  type: string;
-  budget: string;
-  message?: string;
+  phone?: string;
+  service: string;
+  budget?: string;
+  message: string;
 }
 
 export async function POST(request: Request) {
   try {
-    const body: ContactPayload = await request.json();
+    const body: ContactInquiryPayload = await request.json();
 
-    // Basic Validation
-    if (!body.name || !body.email || !body.type) {
+    // Required fields validation
+    if (!body.name || !body.name.trim()) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "Please complete all required fields (Name, Email, and Project Type).",
-        },
+        { success: false, error: "Please enter your name." },
+        { status: 400 }
+      );
+    }
+
+    if (!body.email || !body.email.trim()) {
+      return NextResponse.json(
+        { success: false, error: "Please enter your email address." },
         { status: 400 }
       );
     }
@@ -26,37 +32,50 @@ export async function POST(request: Request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(body.email)) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "Please provide a valid email address.",
-        },
+        { success: false, error: "Please provide a valid email address." },
         { status: 400 }
       );
     }
 
-    // Process & log inquiry
-    console.log("[INQUIRY_RECEIVED]:", {
+    if (!body.service || !body.service.trim()) {
+      return NextResponse.json(
+        { success: false, error: "Please select a service category." },
+        { status: 400 }
+      );
+    }
+
+    if (!body.message || !body.message.trim()) {
+      return NextResponse.json(
+        { success: false, error: "Please provide a brief description of your project." },
+        { status: 400 }
+      );
+    }
+
+    // Safely log the structured inquiry for internal triage
+    console.log("[itWADURA_INQUIRY_RECEIVED]:", {
       timestamp: new Date().toISOString(),
-      name: body.name,
-      email: body.email,
-      type: body.type,
-      budget: body.budget || "Not specified",
-      message: body.message || "",
+      name: body.name.trim(),
+      businessName: body.businessName?.trim() || "Not provided",
+      email: body.email.trim(),
+      phone: body.phone?.trim() || "Not provided",
+      service: body.service,
+      budget: body.budget || "To be discussed",
+      message: body.message.trim(),
     });
 
     return NextResponse.json(
       {
         success: true,
-        message: "Thank you for reaching out. Our engineering team has received your inquiry and will respond within 24 hours.",
+        message: "Thank you for reaching out. We have received your inquiry and will be in touch within 24 business hours.",
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("[CONTACT_API_ERROR]:", error);
+  } catch (err: unknown) {
+    console.error("[itWADURA_CONTACT_ERROR]:", err);
     return NextResponse.json(
       {
         success: false,
-        error: "Internal server error. Please try again or email us directly at info@itwadura.com.",
+        error: "An unexpected error occurred while transmitting your request. Please try again or email us directly.",
       },
       { status: 500 }
     );

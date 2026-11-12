@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "neutral" | "active" | "warning" | "lime" | "cyan" | "purple";
+  variant?: "navy" | "navy-subtle" | "blue" | "neutral" | "active";
   dot?: boolean;
 }
 
@@ -14,27 +14,25 @@ export const Badge: React.FC<BadgeProps> = ({
   ...props
 }) => {
   const variantStyles = {
-    neutral: "bg-white/[0.04] text-muted-foreground border-white/[0.08]",
-    active: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-    warning: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-    lime: "bg-[#d4f53b]/10 text-[#d4f53b] border-[#d4f53b]/20",
-    cyan: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-    purple: "bg-purple-500/10 text-purple-300 border-purple-500/20",
+    navy: "bg-[#193b63] text-white border-[#193b63]",
+    "navy-subtle": "bg-[#193b63]/[0.06] text-[#193b63] border-[#193b63]/[0.14]",
+    blue: "bg-[#f0f8fc] text-[#193b63] border-[#8ccff0]/70",
+    neutral: "bg-[#f7f9fc] text-[#4b5563] border-[rgba(17,24,39,0.08)]",
+    active: "bg-[#f0f8fc] text-[#193b63] border-[#8ccff0]",
   };
 
   const dotColors = {
-    neutral: "bg-muted-foreground",
-    active: "bg-emerald-400 animate-pulse",
-    warning: "bg-amber-400",
-    lime: "bg-[#d4f53b] animate-pulse",
-    cyan: "bg-cyan-400 animate-pulse",
-    purple: "bg-purple-400",
+    navy: "bg-white",
+    "navy-subtle": "bg-[#193b63]",
+    blue: "bg-[#8ccff0]",
+    neutral: "bg-[#6b7280]",
+    active: "bg-[#193b63] animate-pulse",
   };
 
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium tracking-wide uppercase border backdrop-blur-sm",
+        "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-medium tracking-wide border transition-colors",
         variantStyles[variant],
         className
       )}

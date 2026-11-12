@@ -9,9 +9,9 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, error, id, ...props }, ref) => {
     return (
-      <div className="w-full space-y-1.5">
+      <div className="w-full space-y-1.5 text-left">
         {label && (
-          <label htmlFor={id} className="block text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <label htmlFor={id} className="block text-xs font-semibold tracking-wide text-[#193b63]">
             {label}
           </label>
         )}
@@ -19,15 +19,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           id={id}
           ref={ref}
           className={cn(
-            "w-full rounded-xl bg-white/[0.03] border border-white/[0.08] px-4 py-2.5 text-sm text-foreground",
-            "placeholder:text-muted-foreground/60 transition-all duration-200 outline-none",
-            "focus:border-white/20 focus:bg-white/[0.05] focus:ring-1 focus:ring-white/20",
-            error && "border-red-500/50 focus:border-red-500 focus:ring-red-500/30",
+            "w-full rounded-xl bg-white border border-[rgba(17,24,39,0.12)] px-4 py-3 text-sm text-[#111827]",
+            "placeholder:text-gray-400 transition-all duration-200 outline-none",
+            "focus:border-[#193b63] focus:ring-2 focus:ring-[#8ccff0]/40 shadow-sm",
+            error && "border-red-500 focus:border-red-500 focus:ring-red-200",
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-red-400 font-mono">{error}</p>}
+        {error && <p className="text-xs text-red-600 font-mono">{error}</p>}
       </div>
     );
   }
@@ -42,9 +42,9 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, error, id, ...props }, ref) => {
     return (
-      <div className="w-full space-y-1.5">
+      <div className="w-full space-y-1.5 text-left">
         {label && (
-          <label htmlFor={id} className="block text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <label htmlFor={id} className="block text-xs font-semibold tracking-wide text-[#193b63]">
             {label}
           </label>
         )}
@@ -52,15 +52,15 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={id}
           ref={ref}
           className={cn(
-            "w-full rounded-xl bg-white/[0.03] border border-white/[0.08] px-4 py-2.5 text-sm text-foreground",
-            "placeholder:text-muted-foreground/60 transition-all duration-200 outline-none min-h-[100px] resize-y",
-            "focus:border-white/20 focus:bg-white/[0.05] focus:ring-1 focus:ring-white/20",
-            error && "border-red-500/50 focus:border-red-500 focus:ring-red-500/30",
+            "w-full rounded-xl bg-white border border-[rgba(17,24,39,0.12)] px-4 py-3 text-sm text-[#111827]",
+            "placeholder:text-gray-400 transition-all duration-200 outline-none min-h-[120px] resize-y",
+            "focus:border-[#193b63] focus:ring-2 focus:ring-[#8ccff0]/40 shadow-sm",
+            error && "border-red-500 focus:border-red-500 focus:ring-red-200",
             className
           )}
           {...props}
         />
-        {error && <p className="text-xs text-red-400 font-mono">{error}</p>}
+        {error && <p className="text-xs text-red-600 font-mono">{error}</p>}
       </div>
     );
   }
@@ -76,9 +76,9 @@ export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElemen
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, label, error, id, options, ...props }, ref) => {
     return (
-      <div className="w-full space-y-1.5">
+      <div className="w-full space-y-1.5 text-left">
         {label && (
-          <label htmlFor={id} className="block text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <label htmlFor={id} className="block text-xs font-semibold tracking-wide text-[#193b63]">
             {label}
           </label>
         )}
@@ -86,21 +86,21 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           id={id}
           ref={ref}
           className={cn(
-            "w-full rounded-xl bg-[#0d0e12] border border-white/[0.08] px-4 py-2.5 text-sm text-foreground",
+            "w-full rounded-xl bg-white border border-[rgba(17,24,39,0.12)] px-4 py-3 text-sm text-[#111827]",
             "transition-all duration-200 outline-none cursor-pointer",
-            "focus:border-white/20 focus:bg-[#13151b] focus:ring-1 focus:ring-white/20",
-            error && "border-red-500/50 focus:border-red-500 focus:ring-red-500/30",
+            "focus:border-[#193b63] focus:ring-2 focus:ring-[#8ccff0]/40 shadow-sm",
+            error && "border-red-500 focus:border-red-500 focus:ring-red-200",
             className
           )}
           {...props}
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} className="bg-[#0d0e12] text-foreground">
+            <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
           ))}
         </select>
-        {error && <p className="text-xs text-red-400 font-mono">{error}</p>}
+        {error && <p className="text-xs text-red-600 font-mono">{error}</p>}
       </div>
     );
   }

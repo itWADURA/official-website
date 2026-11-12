@@ -1,18 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Clock, CheckCircle2, ArrowRight, AlertCircle, Loader2 } from "lucide-react";
+import { Mail, Phone, Clock, CheckCircle2, ArrowRight, AlertCircle, Loader2 } from "lucide-react";
+import { CONTACT_SERVICES, CONTACT_BUDGET_TIERS } from "@/lib/constants";
 import { Badge } from "@/app/components/ui/badge";
-import { Card } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
-import { Input, Select, Textarea } from "@/app/components/ui/input";
+import { Input, Textarea, Select } from "@/app/components/ui/input";
 
 export const ContactTemplate: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
+    businessName: "",
     email: "",
-    type: "web",
-    budget: "10k-25k",
+    phone: "",
+    service: CONTACT_SERVICES[0],
+    budget: CONTACT_BUDGET_TIERS[0],
     message: "",
   });
 
@@ -34,91 +36,90 @@ export const ContactTemplate: React.FC = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to submit request.");
+        throw new Error(data.error || "Failed to transmit inquiry.");
       }
 
       setStatus("success");
       setStatusMessage(data.message);
       setFormData({
         name: "",
+        businessName: "",
         email: "",
-        type: "web",
-        budget: "10k-25k",
+        phone: "",
+        service: CONTACT_SERVICES[0],
+        budget: CONTACT_BUDGET_TIERS[0],
         message: "",
       });
     } catch (err: unknown) {
       setStatus("error");
-      setStatusMessage(err instanceof Error ? err.message : "Something went wrong.");
+      setStatusMessage(
+        err instanceof Error
+          ? err.message
+          : "An unexpected error occurred. Please check your network or try again."
+      );
     }
   };
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32">
+    <section id="contact" className="relative py-24 sm:py-32 bg-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Context Column */}
-          <div className="lg:col-span-5 space-y-6">
-            <Badge variant="cyan" dot>
-              FIG 0.6 · PROJECT INQUIRY
-            </Badge>
+          {/* Left Column: Context & Direct Contact */}
+          <div className="lg:col-span-5 space-y-8">
+            <div>
+              <Badge variant="blue" className="mb-4">
+                08 / LET&apos;S WORK TOGETHER
+              </Badge>
+              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#111827] leading-tight">
+                Have an Idea?{" "}
+                <span className="text-[#193b63] block sm:inline">Let&apos;s Make It Happen.</span>
+              </h2>
+              <p className="mt-4 text-base sm:text-lg text-[#4b5563] leading-relaxed">
+                Whether you&apos;re building a new website, improving business operations, or exploring automation, we&apos;d love to hear what you&apos;re working on.
+              </p>
+            </div>
 
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-              Initiate Collaboration{" "}
-              <span className="text-muted-foreground font-normal block sm:inline">
-                tell us about your roadmap.
-              </span>
-            </h2>
-
-            <p className="text-base text-muted-foreground leading-relaxed">
-              Have an ambitious vision or complex infrastructure challenge? Submit your technical requirements,
-              and our lead engineers will evaluate scope and schedule an architecture review.
-            </p>
-
-            {/* Direct Contact Metrics */}
-            <div className="pt-6 space-y-4">
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.04] text-white">
-                  <Mail className="h-5 w-5" />
+            <div className="p-6 rounded-2xl bg-[#f7f9fc] border border-[rgba(17,24,39,0.08)] space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-xl bg-white border border-[rgba(17,24,39,0.08)] flex items-center justify-center text-[#193b63]">
+                  <Clock className="h-4 w-4" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono uppercase text-muted-foreground block">
-                    Direct Engineering Contact
-                  </span>
-                  <a
-                    href="mailto:info@itwadura.com"
-                    className="text-sm font-semibold text-white hover:text-[#40c4ff] transition-colors"
-                  >
-                    info@itwadura.com
+                  <h4 className="text-xs font-bold text-[#111827]">Rapid Response</h4>
+                  <p className="text-xs text-[#6b7280]">We review inquiries and reply within 24 business hours.</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-xl bg-white border border-[rgba(17,24,39,0.08)] flex items-center justify-center text-[#193b63]">
+                  <Mail className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-[#111827]">Direct Email</h4>
+                  <a href="mailto:hello@itwadura.com" className="text-xs text-[#193b63] font-medium hover:underline">
+                    hello@itwadura.com
                   </a>
                 </div>
               </div>
+            </div>
 
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/[0.04] text-[#d4f53b]">
-                  <Clock className="h-5 w-5" />
-                </div>
-                <div>
-                  <span className="text-xs font-mono uppercase text-muted-foreground block">
-                    Turnaround Commitment
-                  </span>
-                  <span className="text-sm font-semibold text-white">
-                    Initial assessment within 24 business hours
-                  </span>
-                </div>
-              </div>
+            <div className="p-5 rounded-2xl bg-[#f0f8fc] border border-[#8ccff0]/50 text-xs text-[#193b63] leading-relaxed">
+              <strong>Non-Disclosure &amp; Confidentiality:</strong> All business workflows and ideas discussed remain 100% confidential.
             </div>
           </div>
 
-          {/* Right Form Card */}
+          {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7">
-            <Card glow className="p-6 sm:p-10">
+            <div className="rounded-3xl bg-[#f7f9fc] border border-[rgba(17,24,39,0.08)] p-8 sm:p-10 shadow-[0_8px_30px_rgba(17,24,39,0.04)]">
               {status === "success" ? (
-                <div className="py-12 text-center space-y-4">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <div className="p-8 text-center space-y-4">
+                  <div className="h-14 w-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center mx-auto">
                     <CheckCircle2 className="h-7 w-7" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">Inquiry Received</h3>
-                  <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+                  <h3 className="text-2xl font-bold text-[#111827]">
+                    Inquiry Received
+                  </h3>
+                  <p className="text-sm text-[#4b5563] max-w-md mx-auto leading-relaxed">
                     {statusMessage}
                   </p>
                   <div className="pt-4">
@@ -127,55 +128,62 @@ export const ContactTemplate: React.FC = () => {
                       size="sm"
                       onClick={() => setStatus("idle")}
                     >
-                      Submit Another Inquiry
+                      Submit Another Message
                     </Button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Input
                       id="name"
-                      label="Full Name"
-                      placeholder="Ada Lovelace"
+                      label="Your Name *"
                       required
+                      placeholder="Jane Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                     <Input
-                      id="email"
-                      type="email"
-                      label="Work Email"
-                      placeholder="ada@company.com"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      id="businessName"
+                      label="Business / Organization Name"
+                      placeholder="Acme Enterprises (Optional)"
+                      value={formData.businessName}
+                      onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <Select
-                      id="type"
-                      label="Project Domain"
-                      options={[
-                        { label: "High-Velocity Web Engineering", value: "web" },
-                        { label: "Edge Infrastructure & Cloud", value: "cloud" },
-                        { label: "Autonomous AI Systems", value: "ai" },
-                        { label: "Design System & Product UI", value: "design" },
-                      ]}
-                      value={formData.type}
-                      onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Input
+                      id="email"
+                      type="email"
+                      label="Email Address *"
+                      required
+                      placeholder="jane@company.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
+                    <Input
+                      id="phone"
+                      type="tel"
+                      label="Contact Number"
+                      placeholder="+1 (555) 000-0000 (Optional)"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    />
+                  </div>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Select
+                      id="service"
+                      label="Service Required *"
+                      options={CONTACT_SERVICES.map((s) => ({ label: s, value: s }))}
+                      value={formData.service}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    />
                     <Select
                       id="budget"
-                      label="Target Budget"
-                      options={[
-                        { label: "< $5,000 USD", value: "under-5k" },
-                        { label: "$5,000 – $15,000 USD", value: "5k-15k" },
-                        { label: "$15,000 – $50,000 USD", value: "15k-50k" },
-                        { label: "$50,000+ USD", value: "50k-plus" },
-                      ]}
+                      label="Estimated Budget"
+                      options={CONTACT_BUDGET_TIERS.map((b) => ({ label: b, value: b }))}
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                     />
@@ -183,15 +191,15 @@ export const ContactTemplate: React.FC = () => {
 
                   <Textarea
                     id="message"
-                    label="Project Scope & Objectives"
-                    placeholder="Brief overview of what you're building, target timeline, and any key technical constraints..."
-                    rows={4}
+                    label="Project Description *"
+                    required
+                    placeholder="Tell us about your business, the challenge you're looking to solve, or what kind of software you'd like to build..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />
 
                   {status === "error" && (
-                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-400 flex items-center gap-2 font-mono">
+                    <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-center gap-2">
                       <AlertCircle className="h-4 w-4 shrink-0" />
                       <span>{statusMessage}</span>
                     </div>
@@ -202,7 +210,7 @@ export const ContactTemplate: React.FC = () => {
                       type="submit"
                       variant="primary"
                       size="lg"
-                      className="w-full sm:w-auto"
+                      className="w-full"
                       disabled={status === "loading"}
                       icon={
                         status === "loading" ? (
@@ -212,12 +220,12 @@ export const ContactTemplate: React.FC = () => {
                         )
                       }
                     >
-                      {status === "loading" ? "Dispatching..." : "Transmit Inquiry"}
+                      {status === "loading" ? "Submitting Inquiry..." : "Send Project Inquiry"}
                     </Button>
                   </div>
                 </form>
               )}
-            </Card>
+            </div>
           </div>
         </div>
       </div>
