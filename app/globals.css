@@ -154,6 +154,71 @@ body {
   }
 }
 
+/* Hero Technical Grid (Fine 1px line, 0.035 opacity navy tint) */
+.hero-technical-grid {
+  background-image: 
+    linear-gradient(to right, rgba(25, 59, 99, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(25, 59, 99, 0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* Subtle Hero Floating Ambient Orbs (GPU Accelerated) */
+@keyframes heroOrb1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(28px, 36px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(-16px, 20px, 0) scale(0.98);
+  }
+}
+
+@keyframes heroOrb2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-34px, 26px, 0) scale(0.95);
+  }
+  100% {
+    transform: translate3d(18px, -18px, 0) scale(1.03);
+  }
+}
+
+@keyframes heroOrb3 {
+  0% {
+    transform: translate3d(-50%, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-48%, -28px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-52%, 14px, 0) scale(0.97);
+  }
+}
+
+.animate-hero-orb-1 {
+  animation: heroOrb1 16s ease-in-out infinite alternate;
+}
+
+.animate-hero-orb-2 {
+  animation: heroOrb2 19s ease-in-out infinite alternate;
+}
+
+.animate-hero-orb-3 {
+  animation: heroOrb3 15s ease-in-out infinite alternate;
+}
+
+@media (max-width: 768px) {
+  .animate-hero-orb-1,
+  .animate-hero-orb-2,
+  .animate-hero-orb-3 {
+    animation: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

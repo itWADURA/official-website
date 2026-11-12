@@ -10,7 +10,56 @@ export const HeroTemplate: React.FC = () => {
 
   return (
     <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* Ambient Hero Background Elements (Pure White Editorial Base) */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
+        {/* 1. Subtle Central Hero Light-Blue Spotlight */}
+        <div
+          className="absolute left-1/2 top-6 sm:top-12 -translate-x-1/2 w-[650px] sm:w-[950px] h-[450px] sm:h-[600px] rounded-full blur-[90px] sm:blur-[130px]"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(140, 207, 240, 0.22) 0%, rgba(140, 207, 240, 0.06) 50%, transparent 75%)",
+          }}
+        />
+
+        {/* 2. Fine Technical Grid Pattern (Extremely faint navy lines, 0.035 opacity) */}
+        <div
+          className="absolute inset-0 hero-technical-grid"
+          style={{
+            maskImage: "radial-gradient(ellipse 65% 55% at 50% 32%, black 35%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 65% 55% at 50% 32%, black 35%, transparent 80%)",
+          }}
+        />
+
+        {/* 3. Softly Blurred Floating Ambient Blue Orbs */}
+        {/* Orb 1: Upper-left soft light blue */}
+        <div
+          className="absolute -top-12 left-[6%] sm:left-[12%] w-[320px] sm:w-[480px] h-[320px] sm:h-[480px] rounded-full blur-[100px] sm:blur-[140px] animate-hero-orb-1 will-change-transform"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(140, 207, 240, 0.16) 0%, rgba(140, 207, 240, 0.03) 65%, transparent 80%)",
+          }}
+        />
+
+        {/* Orb 2: Upper-right subtle navy orb */}
+        <div
+          className="absolute top-20 right-[5%] sm:right-[10%] w-[300px] sm:w-[440px] h-[300px] sm:h-[440px] rounded-full blur-[110px] sm:blur-[150px] animate-hero-orb-2 will-change-transform"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(25, 59, 99, 0.03) 0%, rgba(140, 207, 240, 0.05) 55%, transparent 75%)",
+          }}
+        />
+
+        {/* Orb 3: Behind workspace preview */}
+        <div
+          className="absolute top-[48%] left-1/2 w-[460px] sm:w-[680px] h-[260px] sm:h-[360px] rounded-full blur-[110px] sm:blur-[150px] animate-hero-orb-3 will-change-transform"
+          style={{
+            background:
+              "radial-gradient(ellipse, rgba(140, 207, 240, 0.12) 0%, rgba(240, 248, 252, 0.05) 60%, transparent 75%)",
+          }}
+        />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
         {/* Main Hero Header */}
         <div className="mx-auto max-w-4xl text-center">
           {/* Micro-Typography Badge */}
